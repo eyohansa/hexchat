@@ -46,13 +46,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hcupd</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hcupd</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,6 +73,7 @@
       <ModuleDefinitionFile>upd.def</ModuleDefinitionFile>
       <AdditionalDependencies>$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,6 +94,7 @@
       <ModuleDefinitionFile>upd.def</ModuleDefinitionFile>
       <AdditionalDependencies>$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

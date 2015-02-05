@@ -46,13 +46,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hcsysinfo</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hcsysinfo</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,6 +75,7 @@
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>wbemuuid.lib;comsupp.lib;$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>comsupp.lib</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -97,6 +98,7 @@
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>wbemuuid.lib;comsupp.lib;$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>comsupp.lib</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -45,12 +45,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatLib)</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatLib)</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,10 +67,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDatabaseFile>$(HexChatPdb)$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
-    <PostBuildEvent>
-      <Command>"$(HexChatBin)make-te.exe" &lt; "$(ProjectDir)textevents.in" &gt; "$(ProjectDir)textevents.h" 2&gt; "$(ProjectDir)textenums.h"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -86,9 +84,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ProgramDatabaseFile>$(HexChatPdb)$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
     <PostBuildEvent>
-      <Command>"$(HexChatBin)make-te.exe" &lt; "$(ProjectDir)textevents.in" &gt; "$(ProjectDir)textevents.h" 2&gt; "$(ProjectDir)textenums.h"</Command>
+      <Command>"$(HexChatLib)make-te.exe" &lt; "$(ProjectDir)textevents.in" &gt; "$(ProjectDir)textevents.h" 2&gt; "$(ProjectDir)textenums.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

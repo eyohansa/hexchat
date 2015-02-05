@@ -52,18 +52,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>hcnotifications-winrt</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(HexChatBin)</OutDir>
     <TargetName>hcnotifications-winrt</TargetName>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -91,6 +87,7 @@
       <AdditionalDependencies>$(DepLibs);mincore.lib;runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MinimumRequiredVersion>6.03</MinimumRequiredVersion>
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,6 +116,7 @@
       <AdditionalDependencies>$(DepLibs);mincore.lib;runtimeobject.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <MinimumRequiredVersion>6.03</MinimumRequiredVersion>
       <AdditionalLibraryDirectories>$(DepsRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

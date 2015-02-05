@@ -43,11 +43,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
@@ -64,10 +64,8 @@
       <Command>
       <![CDATA[
 SET SOLUTIONDIR=$(SolutionDir)..\
-powershell -File "$(SolutionDir)..\win32\version-template.ps1" "$(SolutionDir)..\win32\installer\hexchat.iss.tt" "$(SolutionDir)..\win32\installer\hexchat.iss"
-del "$(OutDir)hexchat.iss"
-type hexchat.iss >> "$(OutDir)hexchat.iss"
-$(IsccPath) /dPROJECTDIR="$(ProjectDir)" /dAPPARCH="$(Platform)" "$(OutDir)hexchat.iss"
+powershell -File "$(SolutionDir)..\win32\version-template.ps1" "$(SolutionDir)..\win32\installer\hexchat.iss.tt" "$(HexChatBin)hexchat.iss"
+$(IsccPath) /dPROJECTDIR="$(ProjectDir)" /dAPPARCH="$(Platform)" "$(HexChatBin)hexchat.iss"
       ]]>
       </Command>
     </PreBuildEvent>

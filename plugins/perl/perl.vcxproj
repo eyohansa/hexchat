@@ -46,13 +46,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(PerlOutput)</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(PerlOutput)</TargetName>
-    <OutDir>$(HexChatBin)</OutDir>
+    <OutDir>$(HexChatRel)plugins\</OutDir>
     <IntDir>$(HexChatObj)$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +74,7 @@
       <AdditionalDependencies>$(PerlLib).lib;$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>perl.def</ModuleDefinitionFile>
       <DelayLoadDLLs>$(PerlLib).dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>"$(GendefPath)\gendef" "$(PerlPath)\bin\$(PerlLib).dll"
@@ -103,6 +104,7 @@ move hexchat.pm.h "$(IntDir)"</Command>
       <AdditionalDependencies>$(PerlLib).lib;$(DepLibs);%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>perl.def</ModuleDefinitionFile>
       <DelayLoadDLLs>$(PerlLib).dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <ProgramDatabaseFile>$(HexChatPdb)plugins\$(TargetName).pdb</ProgramDatabaseFile>
     </Link>
     <PreBuildEvent>
       <Command>"$(GendefPath)\gendef" "$(PerlPath)\bin\$(PerlLib).dll"
