@@ -32,7 +32,7 @@ src/fe-gtk/joind.c
 src/fe-gtk/maingui.c
 src/fe-gtk/menu.c
 src/fe-gtk/notifygui.c
-src/fe-gtk/plugin-notifications.c
+src/fe-gtk/plugin-notification.c
 src/fe-gtk/plugin-tray.c
 src/fe-gtk/plugingui.c
 src/fe-gtk/rawlog.c
@@ -43,3 +43,4 @@ src/fe-gtk/textgui.c
 src/fe-gtk/urlgrab.c
 src/fe-gtk/userlistgui.c
 src/fe-text/fe-text.c
+plugins/sysinfo/sysinfo.c

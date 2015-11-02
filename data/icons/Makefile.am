@@ -19,3 +19,5 @@ install-data-hook:
 
 uninstall-hook:
 	$(UPDATE_ICON_CACHE);
+
+EXTRA_DIST = $(icon_DATA) $(hicolor_DATA)

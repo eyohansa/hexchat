@@ -78,7 +78,7 @@ static void mg_link_irctab (session *sess, int focus);
 static session_gui static_mg_gui;
 static session_gui *mg_gui = NULL;	/* the shared irc tab */
 static int ignore_chanmode = FALSE;
-static const char chan_flags[] = { 'c', 'n', 'r', 't', 'i', 'm', 'l', 'k' };
+static const char chan_flags[] = { 'c', 'n', 't', 'i', 'm', 'l', 'k' };
 
 static chan *active_tab = NULL;	/* active tab */
 GtkWidget *parent_window = NULL;			/* the master window */
@@ -2003,17 +2003,24 @@ mg_flagbutton_cb (GtkWidget *but, char *flag)
 static GtkWidget *
 mg_create_flagbutton (char *tip, GtkWidget *box, char *face)
 {
-	GtkWidget *wid;
+	GtkWidget *btn, *lbl;
+	char label_markup[16];
 
-	wid = gtk_toggle_button_new_with_label (face);
-	gtk_widget_set_size_request (wid, 18, 0);
-	gtk_widget_set_tooltip_text (wid, tip);
-	gtk_box_pack_start (GTK_BOX (box), wid, 0, 0, 0);
-	g_signal_connect (G_OBJECT (wid), "toggled",
+	g_snprintf (label_markup, sizeof(label_markup), "<tt>%s</tt>", face);
+	lbl = gtk_label_new (NULL);
+	gtk_label_set_markup (GTK_LABEL(lbl), label_markup);
+
+	btn = gtk_toggle_button_new ();
+	gtk_widget_set_size_request (btn, -1, 0);
+	gtk_widget_set_tooltip_text (btn, tip);
+	gtk_container_add (GTK_CONTAINER(btn), lbl);
+
+	gtk_box_pack_start (GTK_BOX (box), btn, 0, 0, 0);
+	g_signal_connect (G_OBJECT (btn), "toggled",
 							G_CALLBACK (mg_flagbutton_cb), face);
-	show_and_unfocus (wid);
+	show_and_unfocus (btn);
 
-	return wid;
+	return btn;
 }
 
 static void
@@ -2068,7 +2075,6 @@ mg_create_chanmodebuttons (session_gui *gui, GtkWidget *box)
 {
 	gui->flag_c = mg_create_flagbutton (_("Filter Colors"), box, "c");
 	gui->flag_n = mg_create_flagbutton (_("No outside messages"), box, "n");
-	gui->flag_r = mg_create_flagbutton (_("Registered Only"), box, "r");
 	gui->flag_t = mg_create_flagbutton (_("Topic Protection"), box, "t");
 	gui->flag_i = mg_create_flagbutton (_("Invite Only"), box, "i");
 	gui->flag_m = mg_create_flagbutton (_("Moderated"), box, "m");
@@ -2942,7 +2948,7 @@ mg_create_search(session *sess, GtkWidget *box)
 	gtk_box_pack_start(GTK_BOX(gui->shbox), next, FALSE, FALSE, 0);
 	g_signal_connect(G_OBJECT(next), "clicked", G_CALLBACK(mg_search_handle_next), sess);
 
-	highlight = gtk_check_button_new_with_mnemonic (_("Highlight _all"));
+	highlight = gtk_check_button_new_with_mnemonic (_("_Highlight all"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(highlight), prefs.hex_text_search_highlight_all);
 	gtk_widget_set_can_focus (highlight, FALSE);
 	g_signal_connect (G_OBJECT (highlight), "toggled", G_CALLBACK (search_set_option), &prefs.hex_text_search_highlight_all);

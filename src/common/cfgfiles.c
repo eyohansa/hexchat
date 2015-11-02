@@ -39,7 +39,7 @@
 #endif
 
 #define DEF_FONT "Monospace 9"
-#define DEF_FONT_ALTER "Arial Unicode MS,Lucida Sans Unicode,Meiryo,Symbola,Unifont"
+#define DEF_FONT_ALTER "Arial Unicode MS,Segoe UI Emoji,Lucida Sans Unicode,Meiryo,Symbola,Unifont"
 
 const char * const languages[LANGUAGES_LENGTH] = {
 	"af", "sq", "am", "ast", "az", "eu", "be", "bg", "ca", "zh_CN",      /*  0 ..  9 */
@@ -226,12 +226,12 @@ cfg_put_str (int fh, char *var, char *value)
 }
 
 int
-cfg_put_color (int fh, int r, int g, int b, char *var)
+cfg_put_color (int fh, guint16 r, guint16 g, guint16 b, char *var)
 {
 	char buf[400];
 	int len;
 
-	g_snprintf (buf, sizeof buf, "%s = %04x %04x %04x\n", var, r, g, b);
+	g_snprintf (buf, sizeof buf, "%s = %04hx %04hx %04hx\n", var, r, g, b);
 	len = strlen (buf);
 	return (write (fh, buf, len) == len);
 }
@@ -251,14 +251,14 @@ cfg_put_int (int fh, int value, char *var)
 }
 
 int
-cfg_get_color (char *cfg, char *var, int *r, int *g, int *b)
+cfg_get_color (char *cfg, char *var, guint16 *r, guint16 *g, guint16 *b)
 {
 	char str[128];
 
 	if (!cfg_get_str (cfg, var, str, sizeof (str)))
 		return 0;
 
-	sscanf (str, "%04x %04x %04x", r, g, b);
+	sscanf (str, "%04hx %04hx %04hx", r, g, b);
 	return 1;
 }
 
@@ -482,7 +482,6 @@ const struct prefs vars[] =
 	{"input_balloon_chans", P_OFFINT (hex_input_balloon_chans), TYPE_BOOL},
 	{"input_balloon_hilight", P_OFFINT (hex_input_balloon_hilight), TYPE_BOOL},
 	{"input_balloon_priv", P_OFFINT (hex_input_balloon_priv), TYPE_BOOL},
-	{"input_balloon_time", P_OFFINT (hex_input_balloon_time), TYPE_INT},
 	{"input_beep_chans", P_OFFINT (hex_input_beep_chans), TYPE_BOOL},
 	{"input_beep_hilight", P_OFFINT (hex_input_beep_hilight), TYPE_BOOL},
 	{"input_beep_priv", P_OFFINT (hex_input_beep_priv), TYPE_BOOL},
@@ -828,7 +827,6 @@ load_default_config(void)
 	prefs.hex_gui_ulist_pos = 3;
 	prefs.hex_gui_win_height = 400;
 	prefs.hex_gui_win_width = 640;
-	prefs.hex_input_balloon_time = 20;
 	prefs.hex_irc_ban_type = 1;
 	prefs.hex_irc_join_delay = 5;
 	prefs.hex_net_reconnect_delay = 10;
@@ -1349,7 +1347,7 @@ hexchat_fopen_file (const char *file, const char *mode, int xof_flags)
 	FILE *fh;
 
 	if (xof_flags & XOF_FULLPATH)
-		return fopen (file, mode);
+		return g_fopen (file, mode);
 
 	buf = g_build_filename (get_xdir (), file, NULL);
 	fh = g_fopen (buf, mode);

@@ -16,11 +16,11 @@ EXTRA_DIST = \
 	hexchatc.h \
 	hexchat-plugin.h \
 	history.h \
-	identd.c \
 	ignore.h \
 	inbound.h \
 	inet.h \
 	make-te.c \
+	marshalers.list \
 	modes.h \
 	network.h \
 	notify.h \
@@ -34,6 +34,7 @@ EXTRA_DIST = \
 	ssl.h \
 	ssl.c	\
 	text.h \
+	typedef.h \
 	textenums.h \
 	textevents.h \
 	textevents.in \

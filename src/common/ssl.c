@@ -83,9 +83,6 @@ SSL_CTX *
 _SSL_context_init (void (*info_cb_func))
 {
 	SSL_CTX *ctx;
-#ifdef WIN32
-	int i, r;
-#endif
 
 	SSLeay_add_ssl_algorithms ();
 	SSL_load_error_strings ();
@@ -99,21 +96,12 @@ _SSL_context_init (void (*info_cb_func))
 							  |SSL_OP_NO_TICKET
 							  |SSL_OP_CIPHER_SERVER_PREFERENCE);
 
-#if OPENSSL_VERSION_NUMBER >= 0x00908000L /* workaround for OpenSSL 0.9.8 */
+#if OPENSSL_VERSION_NUMBER >= 0x00908000L && !defined (OPENSSL_NO_COMP) /* workaround for OpenSSL 0.9.8 */
 	sk_SSL_COMP_zero(SSL_COMP_get_compression_methods());
 #endif
 
 	/* used in SSL_connect(), SSL_accept() */
 	SSL_CTX_set_info_callback (ctx, info_cb_func);
-
-#ifdef WIN32
-	/* under win32, OpenSSL needs to be seeded with some randomness */
-	for (i = 0; i < 128; i++)
-	{
-		r = rand ();
-		RAND_seed ((unsigned char *)&r, sizeof (r));
-	}
-#endif
 
 	return(ctx);
 }
